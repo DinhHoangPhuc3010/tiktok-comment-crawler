@@ -1,28 +1,27 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TikTok Comment Crawler</title>
+  <title>TikTok Comment Crawler 🕷️</title>
   <link rel="stylesheet" href="/static/css/style.css" />
-  <!-- Be Vietnam Pro: font chuẩn hỗ trợ tiếng Việt đầy đủ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="logo">
-        <span class="logo-icon">&#128375;</span>
+        <span class="logo-icon">🕷️</span>
         <span class="logo-text">TikTok<strong>Crawler</strong></span>
       </div>
       <nav class="nav-links">
         <a href="#crawl-section">Crawl</a>
-        <a href="#results-section">K&#7871;t qu&#7843;</a>
-        <a href="https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler" target="_blank">GitHub &#8599;</a>
+        <a href="#results-section">Kết quả</a>
+        <a href="https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler" target="_blank">GitHub ↗</a>
       </nav>
     </div>
   </header>
@@ -30,11 +29,11 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-badge">&#128293; Mi&#7877;n ph&#237; &amp; M&#227; ngu&#7891;n m&#7903;</div>
-      <h1 class="hero-title">Thu th&#7853;p b&#236;nh lu&#7853;n<br /><span class="gradient-text">TikTok</span> d&#7877; d&#224;ng</h1>
+      <div class="hero-badge">🔥 Miễn phí &amp; Mã nguồn mở</div>
+      <h1 class="hero-title">Thu thập bình luận<br /><span class="gradient-text">TikTok</span> dễ dàng</h1>
       <p class="hero-desc">
-        Nh&#7853;p link video TikTok, ch&#250;ng t&#244;i s&#7869; crawl to&#224;n b&#7897; b&#236;nh lu&#7853;n v&#224; reply &mdash;
-        xu&#7845;t ra file CSV &#273;&#7875; ph&#226;n t&#237;ch d&#7919; li&#7879;u, nghi&#234;n c&#7913;u th&#7883; tr&#432;&#7901;ng, hay sentiment analysis.
+        Nhập link video TikTok, chúng tôi sẽ crawl toàn bộ bình luận và reply —
+        xuất ra file CSV để phân tích dữ liệu, nghiên cứu thị trường, hay sentiment analysis.
       </p>
     </div>
   </section>
@@ -44,29 +43,29 @@
     <div class="container">
       <div class="card crawl-card">
         <div class="card-header">
-          <span class="card-icon">&#128279;</span>
-          <h2>Nh&#7853;p th&#244;ng tin crawl</h2>
+          <span class="card-icon">🔗</span>
+          <h2>Nhập thông tin crawl</h2>
         </div>
 
         <div class="form-group">
           <label for="tiktok-url">Link video TikTok</label>
           <div class="input-wrapper">
-            <span class="input-prefix">&#128279;</span>
+            <span class="input-prefix">🔗</span>
             <input
               type="url"
               id="tiktok-url"
               placeholder="https://www.tiktok.com/@username/video/1234567890"
               autocomplete="off"
             />
-            <button class="btn-paste" id="btn-paste" title="D&#225;n t&#7915; clipboard">&#128203;</button>
+            <button class="btn-paste" id="btn-paste" title="Dán từ clipboard">📋</button>
           </div>
-          <p class="input-hint">V&#237; d&#7909;: https://www.tiktok.com/@username/video/7559970565407149319</p>
+          <p class="input-hint">Ví dụ: https://www.tiktok.com/@username/video/7559970565407149319</p>
         </div>
 
         <div class="form-group">
-          <label for="csv-filename">T&#234;n file CSV xu&#7845;t ra</label>
+          <label for="csv-filename">Tên file CSV xuất ra</label>
           <div class="input-wrapper">
-            <span class="input-prefix">&#128196;</span>
+            <span class="input-prefix">📄</span>
             <input
               type="text"
               id="csv-filename"
@@ -79,10 +78,10 @@
 
         <div class="btn-row">
           <button class="btn btn-primary" id="btn-start">
-            <span class="btn-icon">&#128640;</span> B&#7855;t &#273;&#7847;u Crawl
+            <span class="btn-icon">🚀</span> Bắt đầu Crawl
           </button>
           <button class="btn btn-danger" id="btn-cancel" disabled>
-            <span class="btn-icon">&#9940;</span> Hu&#7927;
+            <span class="btn-icon">⛔</span> Huỷ
           </button>
         </div>
       </div>
@@ -90,19 +89,19 @@
       <!-- PROGRESS CARD -->
       <div class="card progress-card" id="progress-card" style="display:none">
         <div class="card-header">
-          <span class="card-icon">&#9889;</span>
-          <h2>Ti&#7871;n tr&#236;nh Crawl</h2>
-          <div class="status-badge" id="status-badge">&#272;ang ch&#7841;y...</div>
+          <span class="card-icon">⚡</span>
+          <h2>Tiến trình Crawl</h2>
+          <div class="status-badge" id="status-badge">Đang chạy...</div>
         </div>
 
         <div class="stats-row">
           <div class="stat-box">
             <div class="stat-number" id="stat-total">0</div>
-            <div class="stat-label">T&#7893;ng comments</div>
+            <div class="stat-label">Tổng comments</div>
           </div>
           <div class="stat-box">
             <div class="stat-number" id="stat-status">-</div>
-            <div class="stat-label">Tr&#7841;ng th&#225;i</div>
+            <div class="stat-label">Trạng thái</div>
           </div>
         </div>
 
@@ -113,12 +112,12 @@
         </div>
 
         <div class="log-box" id="log-box">
-          <div class="log-placeholder">Ch&#7901; b&#7855;t &#273;&#7847;u...</div>
+          <div class="log-placeholder">Chờ bắt đầu...</div>
         </div>
 
         <div class="download-row" id="download-row" style="display:none">
           <button class="btn btn-success" id="btn-download">
-            <span class="btn-icon">&#11015;&#65039;</span> T&#7843;i file CSV v&#7873; m&#225;y
+            <span class="btn-icon">⬇️</span> Tải file CSV về máy
           </button>
         </div>
       </div>
@@ -130,17 +129,17 @@
     <div class="container">
       <div class="card results-card" id="results-card" style="display:none">
         <div class="card-header">
-          <span class="card-icon">&#128172;</span>
-          <h2>B&#236;nh lu&#7853;n &#273;&#227; crawl (<span id="result-count">0</span>)</h2>
+          <span class="card-icon">💬</span>
+          <h2>Bình luận đã crawl (<span id="result-count">0</span>)</h2>
         </div>
 
         <div class="search-row">
           <div class="input-wrapper search-wrapper">
-            <span class="input-prefix">&#128269;</span>
+            <span class="input-prefix">🔍</span>
             <input
               type="text"
               id="search-input"
-              placeholder="T&#236;m ki&#7871;m theo n&#7897;i dung ho&#7863;c t&#234;n ng&#432;&#7901;i d&#249;ng..."
+              placeholder="Tìm kiếm theo nội dung hoặc tên người dùng..."
             />
           </div>
         </div>
@@ -150,11 +149,11 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Ng&#432;&#7901;i d&#249;ng</th>
-                <th>N&#7897;i dung b&#236;nh lu&#7853;n</th>
-                <th>&#10084;&#65039; Th&#237;ch</th>
-                <th>Lo&#7841;i</th>
-                <th>Th&#7901;i gian</th>
+                <th>Người dùng</th>
+                <th>Nội dung bình luận</th>
+                <th>❤️ Thích</th>
+                <th>Loại</th>
+                <th>Thời gian</th>
               </tr>
             </thead>
             <tbody id="comments-tbody">
@@ -170,10 +169,10 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <p>&copy; 2024 TikTok Comment Crawler &middot; Made with &#10084;&#65039; in Vietnam</p>
+      <p>© 2024 TikTok Comment Crawler · Made with ❤️ in Vietnam</p>
       <p class="footer-links">
         <a href="https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler" target="_blank">GitHub</a>
-        &middot; Ch&#7881; d&#249;ng cho m&#7909;c &#273;&#237;ch nghi&#234;n c&#7913;u
+        · Chỉ dùng cho mục đích nghiên cứu
       </p>
     </div>
   </footer>

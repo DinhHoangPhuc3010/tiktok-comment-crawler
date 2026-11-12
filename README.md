@@ -1,4 +1,4 @@
-﻿# đŸ•·ï¸ TikTok Comment Crawler
+﻿# 🕷️ TikTok Comment Crawler
 
 <div align="center">
 
@@ -8,231 +8,209 @@
 ![Playwright](https://img.shields.io/badge/Playwright-1.5x-45ba4b?style=for-the-badge&logo=playwright&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-**Thu tháº­p toĂ n bá»™ bĂ¬nh luáº­n & reply tá»« báº¥t ká»³ video TikTok nĂ o â€” ngay trĂªn trĂ¬nh duyá»‡t cá»§a báº¡n.**
+**Thu thập toàn bộ bình luận & reply từ bất kỳ video TikTok nào — ngay trên trình duyệt của bạn.**
 
-[đŸ€ Demo Live](https://tiktok-comment-crawler.onrender.com) Â· [đŸ“– HÆ°á»›ng dáº«n](#-hÆ°á»›ng-dáº«n-sá»­-dá»¥ng) Â· [đŸ› BĂ¡o lá»—i](https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler/issues)
+[🚀 Demo Live](https://tiktok-comment-crawler.onrender.com) · [📖 Hướng dẫn](#-hướng-dẫn-sử-dụng) · [🐛 Báo lỗi](https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler/issues)
 
 </div>
 
 ---
 
-## đŸ“Œ TĂ­nh nÄƒng
+## 📌 Tính năng
 
-| TĂ­nh nÄƒng | MĂ´ táº£ |
+| Tính năng | Mô tả |
 |-----------|-------|
-| đŸ”— **Nháº­p link TikTok** | Há»— trá»£ má»i Ä‘á»‹nh dáº¡ng link video TikTok |
-| đŸ¤– **Tá»± Ä‘á»™ng crawl** | DĂ¹ng Playwright Ä‘á»ƒ láº¥y session há»£p lá»‡, sau Ä‘Ă³ gá»i API TikTok Ä‘á»ƒ thu tháº­p toĂ n bá»™ comment |
-| đŸ’¬ **Crawl cáº£ Reply** | Thu tháº­p comment gá»‘c láº«n toĂ n bá»™ reply con |
-| đŸ“ **Hiá»ƒn thá»‹ trá»±c tiáº¿p** | Xem bĂ¬nh luáº­n ngay trĂªn web â€” phĂ¢n trang, tĂ¬m kiáº¿m theo ná»™i dung/tĂªn user |
-| đŸ“„ **Xuáº¥t CSV** | Äáº·t tĂªn file tĂ¹y Ă½ rá»“i táº£i vá» â€” mĂ£ hĂ³a UTF-8 Ä‘áº§y Ä‘á»§ tiáº¿ng Viá»‡t |
-| â¡ **Log thá»i gian thá»±c** | Theo dĂµi tiáº¿n trĂ¬nh crawl tá»«ng bÆ°á»›c |
-| đŸŒ™ **Giao diá»‡n Dark Mode** | Thiáº¿t káº¿ tá»‘i hiá»‡n Ä‘áº¡i, responsive trĂªn má»i thiáº¿t bá»‹ |
+| 🔗 **Nhập link TikTok** | Hỗ trợ mọi định dạng link video TikTok |
+| 🤖 **Tự động crawl** | Dùng Playwright để lấy session hợp lệ, sau đó gọi API TikTok để thu thập toàn bộ comment |
+| 💬 **Crawl cả Reply** | Thu thập comment gốc lẫn toàn bộ reply con |
+| 📊 **Hiển thị trực tiếp** | Xem bình luận ngay trên web — phân trang, tìm kiếm theo nội dung/tên user |
+| 📄 **Xuất CSV** | Đặt tên file tùy ý rồi tải về — mã hóa UTF-8 đầy đủ tiếng Việt |
+| ⚡ **Log thời gian thực** | Theo dõi tiến trình crawl từng bước |
+| 🌙 **Giao diện Dark Mode** | Thiết kế tối hiện đại, responsive trên mọi thiết bị |
 
 ---
 
-## đŸ“‚ Cáº¥u trĂºc dá»± Ă¡n
+## 📂 Cấu trúc dự án
 
 ```
 tiktok-comment-crawler/
-â”œâ”€â”€ app.py                  # Flask backend â€” API routes & crawl logic
-â”œâ”€â”€ cmt_python.py           # Script gá»‘c (tham kháº£o)
-â”œâ”€â”€ requirements.txt        # ThÆ° viá»‡n Python cáº§n thiáº¿t
-â”œâ”€â”€ Procfile                # Cáº¥u hĂ¬nh deploy Render/Railway
-â”œâ”€â”€ .gitignore
-â”œâ”€â”€ templates/
-â”‚   â””â”€â”€ index.html          # Giao diá»‡n web chĂ­nh
-â”œâ”€â”€ static/
-â”‚   â”œâ”€â”€ css/
-â”‚   â”‚   â””â”€â”€ style.css       # Stylesheet toĂ n bá»™
-â”‚   â””â”€â”€ js/
-â”‚       â””â”€â”€ app.js          # Frontend logic (fetch API, table, pagination)
-â””â”€â”€ output/                 # ThÆ° má»¥c lÆ°u file CSV táº¡m (tá»± táº¡o)
+├── app.py                  # Flask backend — API routes & crawl logic
+├── cmt_python.py           # Script gốc (tham khảo)
+├── requirements.txt        # Thư viện Python cần thiết
+├── Procfile                # Cấu hình deploy Render/Railway
+├── render.yaml             # Render blueprint
+├── render-build.sh         # Render build script
+├── .gitignore
+├── templates/
+│   └── index.html          # Giao diện web chính
+├── static/
+│   ├── css/
+│   │   └── style.css       # Stylesheet toàn bộ
+│   └── js/
+│       └── app.js          # Frontend logic (fetch API, table, pagination)
+└── output/                 # Thư mục lưu file CSV tạm (tự tạo)
 ```
 
 ---
 
-## đŸ€ HÆ°á»›ng dáº«n sá»­ dá»¥ng
+## 🚀 Hướng dẫn sử dụng
 
-### CĂ¡ch 1 â€” Cháº¡y local (khuyáº¿n nghá»‹)
+### Cách 1 — Chạy local (khuyến nghị)
 
-#### YĂªu cáº§u
+#### Yêu cầu
 - Python **3.10+**
 - pip
 
-#### CĂ¡c bÆ°á»›c
+#### Các bước
 
 ```bash
 # 1. Clone repo
 git clone https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler.git
 cd tiktok-comment-crawler
 
-# 2. Táº¡o mĂ´i trÆ°á»ng áº£o (tĂ¹y chá»n nhÆ°ng nĂªn lĂ m)
+# 2. Tạo môi trường ảo (tùy chọn nhưng nên làm)
 python -m venv venv
 # Windows:
 venv\Scripts\activate
 # macOS/Linux:
 source venv/bin/activate
 
-# 3. CĂ i thÆ° viá»‡n
+# 3. Cài thư viện
 pip install -r requirements.txt
 
-# 4. CĂ i Playwright browsers (chá»‰ cáº§n lĂ m 1 láº§n)
+# 4. Cài Playwright browsers (chỉ cần làm 1 lần)
 playwright install chromium
 
-# 5. Cháº¡y server
+# 5. Chạy server
 python app.py
 ```
 
-Má»Ÿ trĂ¬nh duyá»‡t táº¡i: **http://localhost:5000**
+Mở trình duyệt tại: **http://localhost:5000**
 
 ---
 
-### CĂ¡ch 2 â€” Deploy lĂªn Render (miá»…n phĂ­)
+### Cách 2 — Deploy lên Render (miễn phí)
 
-> â ï¸ Render miá»…n phĂ­ cĂ³ thá»ƒ bá»‹ giá»›i háº¡n tĂ i nguyĂªn. Playwright cáº§n **Ă­t nháº¥t 512MB RAM**.
+> ⚠️ Render miễn phí có thể bị giới hạn tài nguyên. Playwright cần **ít nhất 512MB RAM**.
 
-1. Fork repo nĂ y vá» tĂ i khoáº£n GitHub cá»§a báº¡n
-2. ÄÄƒng kĂ½ tĂ i khoáº£n táº¡i [render.com](https://render.com)
-3. Táº¡o **New Web Service** â†’ káº¿t ná»‘i vá»›i repo GitHub
-4. Cáº¥u hĂ¬nh:
+1. Fork repo này về tài khoản GitHub của bạn
+2. Đăng ký tài khoản tại [render.com](https://render.com)
+3. Tạo **New Web Service** → kết nối với repo GitHub `DinhHoangPhuc3010/tiktok-comment-crawler`
+4. Cấu hình:
    - **Environment**: Python 3
    - **Build Command**: `pip install -r requirements.txt && playwright install chromium && playwright install-deps chromium`
    - **Start Command**: `gunicorn app:app --workers 2 --timeout 300`
-5. Nháº¥n **Deploy** vĂ  chá» hoĂ n thĂ nh
+5. Nhấn **Deploy** và chờ hoàn thành
 
 ---
 
-### CĂ¡ch 3 â€” Deploy lĂªn Railway
+### Cách 3 — Deploy lên Railway
 
-1. Fork repo â†’ ÄÄƒng nháº­p [railway.app](https://railway.app)
-2. **New Project** â†’ **Deploy from GitHub repo**
-3. ThĂªm biáº¿n mĂ´i trÆ°á»ng:
-   - `SECRET_KEY` = chuá»—i báº¥t ká»³ (vĂ­ dá»¥: `my-super-secret-key`)
-4. Railway sáº½ tá»± Ä‘á»c `Procfile` vĂ  deploy
+1. Fork repo → Đăng nhập [railway.app](https://railway.app)
+2. **New Project** → **Deploy from GitHub repo**
+3. Thêm biến môi trường:
+   - `SECRET_KEY` = chuỗi bất kỳ (ví dụ: `my-super-secret-key`)
+4. Railway sẽ tự đọc `Procfile` và deploy
 
 ---
 
-## đŸ–¥ï¸ HÆ°á»›ng dáº«n giao diá»‡n
+## 🖥️ Hướng dẫn giao diện
 
-### BÆ°á»›c 1 â€” Nháº­p link video
+### Bước 1 — Nhập link video
 
 ```
 https://www.tiktok.com/@username/video/7559970565407149319
 ```
 
-DĂ¡n link vĂ o Ă´ **"Link video TikTok"** (hoáº·c nháº¥n nĂºt đŸ“‹ Ä‘á»ƒ dĂ¡n tá»« clipboard).
+Dán link vào ô **"Link video TikTok"** (hoặc nhấn nút 📋 để dán từ clipboard).
 
-### BÆ°á»›c 2 â€” Äáº·t tĂªn file CSV
+### Bước 2 — Đặt tên file CSV
 
-Nháº­p tĂªn file tĂ¹y Ă½ (khĂ´ng cáº§n Ä‘uĂ´i `.csv`), vĂ­ dá»¥: `review_san_pham_A`.
+Nhập tên file tùy ý (không cần đuôi `.csv`), ví dụ: `review_san_pham_A`.
 
-### BÆ°á»›c 3 â€” Báº¯t Ä‘áº§u crawl
+### Bước 3 — Bắt đầu crawl
 
-Nháº¥n **đŸ€ Báº¯t Ä‘áº§u Crawl**. Há»‡ thá»‘ng sáº½:
-1. Má»Ÿ trĂ¬nh duyá»‡t áº£o (headless), táº£i trang TikTok Ä‘á»ƒ láº¥y cookie há»£p lá»‡
-2. Click vĂ o khu vá»±c comment Ä‘á»ƒ kĂ­ch hoáº¡t API
-3. Gá»i API TikTok theo tá»«ng trang (cursor-based pagination)
-4. Thu tháº­p toĂ n bá»™ comment + reply
+Nhấn **🚀 Bắt đầu Crawl**. Hệ thống sẽ:
+1. Mở trình duyệt ảo (headless), tải trang TikTok để lấy cookie hợp lệ
+2. Click vào khu vực comment để kích hoạt API
+3. Gọi API TikTok theo từng trang (cursor-based pagination)
+4. Thu thập toàn bộ comment + reply
 
-### BÆ°á»›c 4 â€” Xem káº¿t quáº£
+### Bước 4 — Xem kết quả
 
-Sau khi crawl xong, báº£ng bĂ¬nh luáº­n hiá»‡n ra ngay bĂªn dÆ°á»›i:
-- **TĂ¬m kiáº¿m** theo ná»™i dung hoáº·c tĂªn ngÆ°á»i dĂ¹ng
-- **PhĂ¢n trang** 50 comment/trang
-- Xem loáº¡i (Gá»‘c / Reply), sá»‘ lÆ°á»£ng â¤ï¸
+Sau khi crawl xong, bảng bình luận hiện ra ngay bên dưới:
+- **Tìm kiếm** theo nội dung hoặc tên người dùng
+- **Phân trang** 50 comment/trang
+- Xem loại (Gốc / Reply), số lượng ❤️
 
-### BÆ°á»›c 5 â€” Táº£i vá»
+### Bước 5 — Tải về
 
-Nháº¥n **â¬‡ï¸ Táº£i file CSV vá» mĂ¡y**. File CSV Ä‘Æ°á»£c mĂ£ hĂ³a UTF-8 vá»›i BOM (má»Ÿ Ä‘Æ°á»£c trong Excel tiáº¿ng Viá»‡t).
+Nhấn **⬇️ Tải file CSV về máy**. File CSV được mã hóa UTF-8 với BOM (mở được trực tiếp trong Microsoft Excel mà không bị lỗi font tiếng Việt).
 
 ---
 
-## đŸ“ Cáº¥u trĂºc file CSV xuáº¥t ra
+## 📊 Cấu trúc file CSV xuất ra
 
-| Cá»™t | MĂ´ táº£ |
+| Cột | Mô tả |
 |-----|-------|
 | `cid` | ID comment |
-| `text` | Ná»™i dung bĂ¬nh luáº­n |
-| `create_time` | Thá»i gian Ä‘Äƒng (Unix timestamp) |
-| `digg_count` | Sá»‘ lÆ°á»£t thĂ­ch |
-| `reply_id` | ID comment cha (náº¿u lĂ  reply) |
-| `reply_to_reply_id` | ID reply cha (náº¿u reply lá»“ng nhau) |
-| `reply_to_userid` | User ID Ä‘Æ°á»£c reply |
-| `reply_to_username` | Username Ä‘Æ°á»£c reply |
-| `user_nickname` | TĂªn hiá»ƒn thá»‹ cá»§a ngÆ°á»i comment |
-| `user_id` | UID cá»§a ngÆ°á»i comment |
-| `user_sec_uid` | Secure UID (dĂ¹ng Ä‘á»ƒ tĂ¬m profile) |
+| `text` | Nội dung bình luận |
+| `create_time` | Thời gian đăng (Unix timestamp) |
+| `digg_count` | Số lượt thích |
+| `reply_id` | ID comment cha (nếu là reply) |
+| `reply_to_reply_id` | ID reply cha (nếu reply lồng nhau) |
+| `reply_to_userid` | User ID được reply |
+| `reply_to_username` | Username được reply |
+| `user_nickname` | Tên hiển thị của người comment |
+| `user_id` | UID của người comment |
+| `user_sec_uid` | Secure UID (dùng để tìm profile) |
 
 ---
 
-## â™ï¸ CÆ¡ cháº¿ hoáº¡t Ä‘á»™ng
+## ⚙️ Cơ chế hoạt động
 
 ```
-[User nháº­p URL]
-      â†“
+[User nhập URL]
+      ↓
 [Flask API /api/crawl/start]
-      â†“
-[Thread riĂªng: do_crawl()]
-      â”œâ”€â”€ Playwright (headless Chrome)
-      â”‚     â”œâ”€â”€ Má»Ÿ trang TikTok â†’ láº¥y cookies há»£p lá»‡
-      â”‚     â””â”€â”€ Click nĂºt comment â†’ kĂ­ch hoáº¡t session
-      â”‚
-      â””â”€â”€ requests (API TikTok)
-            â”œâ”€â”€ GET /api/comment/list/ â†’ comment gá»‘c (cursor pagination)
-            â””â”€â”€ GET /api/comment/list/reply/ â†’ reply cá»§a tá»«ng comment
-                â†“
-         [LÆ°u vĂ o memory + file CSV]
-                â†“
-[Frontend poll /api/crawl/status/ má»—i 2s]
-      â†“
-[Hiá»ƒn thá»‹ báº£ng + cho táº£i CSV]
+      ↓
+[Thread riêng: do_crawl()]
+      ├── Playwright (headless Chrome)
+      │     ├── Mở trang TikTok → lấy cookies hợp lệ
+      │     └── Click nút comment → kích hoạt session
+      │
+      └── requests (API TikTok)
+            ├── GET /api/comment/list/ → comment gốc (cursor pagination)
+            └── GET /api/comment/list/reply/ → reply của từng comment
+                ↓
+         [Lưu vào memory + file CSV]
+                ↓
+[Frontend poll /api/crawl/status/ mỗi 2s]
+      ↓
+[Hiển thị bảng + cho tải CSV]
 ```
 
 ---
 
-## â“ FAQ
+## ❓ FAQ
 
-**Q: Táº¡i sao crawl máº¥t thá»i gian lĂ¢u?**  
-A: TikTok cĂ³ rate limiting. Script tá»± Ä‘á»™ng chá» giá»¯a cĂ¡c request Ä‘á»ƒ trĂ¡nh bá»‹ block.
+**Q: Tại sao crawl mất thời gian?**  
+A: TikTok có cơ chế rate limiting. Hệ thống tự động chờ giữa các trang để đảm bảo không bị chặn IP hoặc huỷ session.
 
-**Q: CĂ³ thá»ƒ crawl video private khĂ´ng?**  
-A: KhĂ´ng. Chá»‰ crawl Ä‘Æ°á»£c comment cá»§a video cĂ´ng khai.
+**Q: Có thể crawl video riêng tư (private) không?**  
+A: Không. Chỉ hỗ trợ video công khai (public).
 
-**Q: File CSV má»Ÿ bá»‹ lá»—i font tiáº¿ng Viá»‡t?**  
-A: File Ä‘Æ°á»£c lÆ°u vá»›i encoding UTF-8-BOM. Náº¿u má»Ÿ báº±ng Excel, chá»n **Data > From Text/CSV** vĂ  chá»n encoding UTF-8.
-
-**Q: CĂ³ thá»ƒ dĂ¹ng cho má»¥c Ä‘Ă­ch thÆ°Æ¡ng máº¡i khĂ´ng?**  
-A: Chá»‰ dĂ¹ng cho nghiĂªn cá»©u, há»c thuáº­t. Vui lĂ²ng tuĂ¢n thá»§ [Terms of Service cá»§a TikTok](https://www.tiktok.com/legal/terms-of-service).
+**Q: File CSV mở trong Excel có bị lỗi font không?**  
+A: Không, file được xuất với chuẩn UTF-8-BOM tương thích 100% với Microsoft Excel, Google Sheets và Numbers.
 
 ---
 
-## đŸ›¡ï¸ LÆ°u Ă½ phĂ¡p lĂ½
+## 🛡️ Lưu ý pháp lý
 
-CĂ´ng cá»¥ nĂ y chá»‰ Ä‘Æ°á»£c phĂ¡t triá»ƒn cho má»¥c Ä‘Ă­ch **nghiĂªn cá»©u vĂ  há»c thuáº­t**. NgÆ°á»i dĂ¹ng chá»‹u trĂ¡ch nhiá»‡m tuĂ¢n thá»§:
-- [TikTok Terms of Service](https://www.tiktok.com/legal/terms-of-service)
-- CĂ¡c quy Ä‘á»‹nh vá» quyá»n riĂªng tÆ° dá»¯ liá»‡u táº¡i Ä‘á»‹a phÆ°Æ¡ng
+Công cụ này chỉ được phát triển cho mục đích **nghiên cứu và học thuật**. Người dùng tự chịu trách nhiệm tuân thủ Điều khoản Dịch vụ của TikTok và các quy định về bảo vệ quyền riêng tư.
 
 ---
 
-## đŸ¤ ÄĂ³ng gĂ³p
+## 📄 License
 
-Pull requests vĂ  issues luĂ´n Ä‘Æ°á»£c chĂ o Ä‘Ă³n! Vui lĂ²ng:
-1. Fork repo
-2. Táº¡o branch má»›i: `git checkout -b feature/ten-tinh-nang`
-3. Commit thay Ä‘á»•i: `git commit -m "feat: thĂªm tĂ­nh nÄƒng X"`
-4. Push vĂ  táº¡o Pull Request
-
----
-
-## đŸ“„ License
-
-MIT License â€” xem file [LICENSE](LICENSE) Ä‘á»ƒ biáº¿t thĂªm chi tiáº¿t.
-
----
-
-<div align="center">
-
-Made with â¤ï¸ in Vietnam đŸ‡»đŸ‡³
-
-</div>
-
+Phát hành dưới giấy phép [MIT License](LICENSE).

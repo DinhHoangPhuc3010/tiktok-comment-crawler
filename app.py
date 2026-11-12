@@ -18,6 +18,13 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 app.secret_key = os.environ.get("SECRET_KEY", "tiktok-crawler-secret-2024")
+app.config["JSON_AS_ASCII"] = False
+
+@app.after_request
+def add_charset_header(response):
+    if response.mimetype.startswith("text/") or response.mimetype == "application/json":
+        response.charset = "utf-8"
+    return response
 
 # Thư mục lưu file CSV tạm thời
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "output")
