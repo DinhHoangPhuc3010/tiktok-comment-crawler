@@ -27,11 +27,17 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  /* Be Vietnam Pro hỗ trợ đầy đủ ký tự tiếng Việt có dấu */
+  font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system,
+               'Segoe UI', Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
+  /* Đảm bảo render đúng dấu tiếng Việt */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ─── HEADER ─── */
@@ -208,7 +214,8 @@ body {
   background: #0d0d12; border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 14px 16px; height: 200px; overflow-y: auto;
-  font-family: 'Cascadia Code', 'Consolas', monospace;
+  /* Monospace cho log, với fallback tiếng Việt */
+  font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
   font-size: .78rem; line-height: 1.7; color: #aaa;
   margin-bottom: 20px;
 }
