@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok Comment Crawler đŸ•·ï¸</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- â•â•â• HEADER â•â•â• -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">đŸ•·ï¸</span>
+        <span class="logo-text">TikTok<strong>Crawler</strong></span>
+      </div>
+      <nav class="nav-links">
+        <a href="#crawl-section">Crawl</a>
+        <a href="#results-section">Káº¿t quáº£</a>
+        <a href="https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler" target="_blank">GitHub â†—</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- â•â•â• HERO â•â•â• -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">đŸ”¥ Miá»…n phĂ­ &amp; MĂ£ nguá»“n má»Ÿ</div>
+      <h1 class="hero-title">Thu tháº­p bĂ¬nh luáº­n<br /><span class="gradient-text">TikTok</span> dá»… dĂ ng</h1>
+      <p class="hero-desc">
+        Nháº­p link video TikTok, chĂºng tĂ´i sáº½ crawl toĂ n bá»™ bĂ¬nh luáº­n vĂ  reply â€”
+        xuáº¥t ra file CSV Ä‘á»ƒ phĂ¢n tĂ­ch dá»¯ liá»‡u, nghiĂªn cá»©u thá»‹ trÆ°á»ng, hay sentiment analysis.
+      </p>
+    </div>
+  </section>
+
+  <!-- â•â•â• CRAWL SECTION â•â•â• -->
+  <section class="section" id="crawl-section">
+    <div class="container">
+      <div class="card crawl-card">
+        <div class="card-header">
+          <span class="card-icon">đŸ”—</span>
+          <h2>Nháº­p thĂ´ng tin crawl</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="tiktok-url">Link video TikTok</label>
+          <div class="input-wrapper">
+            <span class="input-prefix">đŸ”—</span>
+            <input
+              type="url"
+              id="tiktok-url"
+              placeholder="https://www.tiktok.com/@username/video/1234567890"
+              autocomplete="off"
+            />
+            <button class="btn-paste" id="btn-paste" title="DĂ¡n tá»« clipboard">đŸ“‹</button>
+          </div>
+          <p class="input-hint">VĂ­ dá»¥: https://www.tiktok.com/@username/video/7559970565407149319</p>
+        </div>
+
+        <div class="form-group">
+          <label for="csv-filename">TĂªn file CSV xuáº¥t ra</label>
+          <div class="input-wrapper">
+            <span class="input-prefix">đŸ“„</span>
+            <input
+              type="text"
+              id="csv-filename"
+              placeholder="tiktok_comments"
+              value="tiktok_comments"
+            />
+            <span class="input-suffix">.csv</span>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-start">
+            <span class="btn-icon">đŸ€</span> Báº¯t Ä‘áº§u Crawl
+          </button>
+          <button class="btn btn-danger" id="btn-cancel" disabled>
+            <span class="btn-icon">â›”</span> Huá»·
+          </button>
+        </div>
+      </div>
+
+      <!-- â•â•â• PROGRESS CARD â•â•â• -->
+      <div class="card progress-card" id="progress-card" style="display:none">
+        <div class="card-header">
+          <span class="card-icon">â¡</span>
+          <h2>Tiáº¿n trĂ¬nh Crawl</h2>
+          <div class="status-badge" id="status-badge">Äang cháº¡y...</div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Tá»•ng comments</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="stat-status">-</div>
+            <div class="stat-label">Tráº¡ng thĂ¡i</div>
+          </div>
+        </div>
+
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="log-box" id="log-box">
+          <div class="log-placeholder">Chá» báº¯t Ä‘áº§u...</div>
+        </div>
+
+        <div class="download-row" id="download-row" style="display:none">
+          <button class="btn btn-success" id="btn-download">
+            <span class="btn-icon">â¬‡ï¸</span> Táº£i file CSV vá» mĂ¡y
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• RESULTS SECTION â•â•â• -->
+  <section class="section" id="results-section">
+    <div class="container">
+      <div class="card results-card" id="results-card" style="display:none">
+        <div class="card-header">
+          <span class="card-icon">đŸ’¬</span>
+          <h2>BĂ¬nh luáº­n Ä‘Ă£ crawl (<span id="result-count">0</span>)</h2>
+        </div>
+
+        <div class="search-row">
+          <div class="input-wrapper search-wrapper">
+            <span class="input-prefix">đŸ”</span>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="TĂ¬m kiáº¿m theo ná»™i dung hoáº·c tĂªn ngÆ°á»i dĂ¹ng..."
+            />
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="comments-table" id="comments-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>NgÆ°á»i dĂ¹ng</th>
+                <th>Ná»™i dung bĂ¬nh luáº­n</th>
+                <th>â¤ï¸ ThĂ­ch</th>
+                <th>Loáº¡i</th>
+                <th>Thá»i gian</th>
+              </tr>
+            </thead>
+            <tbody id="comments-tbody">
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• FOOTER â•â•â• -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Â© 2024 TikTok Comment Crawler Â· Made with â¤ï¸ in Vietnam</p>
+      <p class="footer-links">
+        <a href="https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler" target="_blank">GitHub</a>
+        Â· Chá»‰ dĂ¹ng cho má»¥c Ä‘Ă­ch nghiĂªn cá»©u
+      </p>
+    </div>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
+

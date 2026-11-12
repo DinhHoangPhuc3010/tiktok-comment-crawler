@@ -1,0 +1,15 @@
+output/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+env/
+*.csv
+!tiktok_comments_sample.csv
+.DS_Store
+Thumbs.db
+*.log
+
