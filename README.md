@@ -1,4 +1,4 @@
-﻿# 🕷️ TikTok Comment Crawler
+# 🕷️ TikTok Comment Crawler
 
 <div align="center">
 
@@ -37,9 +37,10 @@ tiktok-comment-crawler/
 ├── app.py                  # Flask backend — API routes & crawl logic
 ├── cmt_python.py           # Script gốc (tham khảo)
 ├── requirements.txt        # Thư viện Python cần thiết
-├── Procfile                # Cấu hình deploy Render/Railway
+├── Dockerfile              # Dockerfile chuẩn cho Render/Railway (đủ lib Chromium)
+├── .dockerignore
+├── Procfile                # Cấu hình deploy WSGI
 ├── render.yaml             # Render blueprint
-├── render-build.sh         # Render build script
 ├── .gitignore
 ├── templates/
 │   └── index.html          # Giao diện web chính
@@ -89,18 +90,18 @@ Mở trình duyệt tại: **http://localhost:5000**
 
 ---
 
-### Cách 2 — Deploy lên Render (miễn phí)
+### Cách 2 — Deploy lên Render (Dùng Docker - Khuyến nghị)
 
-> ⚠️ Render miễn phí có thể bị giới hạn tài nguyên. Playwright cần **ít nhất 512MB RAM**.
+> 💡 Do Playwright cần các thư viện hệ thống của trình duyệt Chromium (apt packages), trên Render bạn cần chọn **Runtime: Docker** (hoàn toàn miễn phí) thay vì Python Native để tránh lỗi thiếu quyền `sudo`.
 
 1. Fork repo này về tài khoản GitHub của bạn
-2. Đăng ký tài khoản tại [render.com](https://render.com)
-3. Tạo **New Web Service** → kết nối với repo GitHub `DinhHoangPhuc3010/tiktok-comment-crawler`
-4. Cấu hình:
-   - **Environment**: Python 3
-   - **Build Command**: `pip install -r requirements.txt && playwright install chromium && playwright install-deps chromium`
-   - **Start Command**: `gunicorn app:app --workers 2 --timeout 300`
-5. Nhấn **Deploy** và chờ hoàn thành
+2. Đăng ký/đăng nhập tài khoản tại [render.com](https://render.com)
+3. Nhấn **New +** → **Web Service** → Chọn repository `tiktok-comment-crawler`
+4. Cấu hình dịch vụ:
+   - **Language / Runtime**: **Docker** (Render sẽ tự động nhận diện file `Dockerfile`)
+   - **Region**: Singapore (gần Việt Nam nhất)
+   - **Instance Type**: Free
+5. Nhấn **Deploy Web Service** và chờ Render build hoàn tất (mất khoảng 3-5 phút).
 
 ---
 
