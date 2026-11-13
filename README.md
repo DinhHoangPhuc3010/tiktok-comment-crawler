@@ -1,217 +1,120 @@
-# 🕷️ TikTok Comment Crawler
+# TikTok Comment Crawler
 
-<div align="center">
+Công cụ web hỗ trợ thu thập toàn bộ bình luận (bao gồm cả phản hồi/reply con) từ một video TikTok bất kỳ và xuất dữ liệu ra file CSV. 
 
-![TikTok Comment Crawler](https://img.shields.io/badge/TikTok-Comment%20Crawler-fe2c55?style=for-the-badge&logo=tiktok&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-3.x-000000?style=for-the-badge&logo=flask&logoColor=white)
-![Playwright](https://img.shields.io/badge/Playwright-1.5x-45ba4b?style=for-the-badge&logo=playwright&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+Hệ thống kết hợp Playwright (headless browser) để tự động hóa việc xác thực phiên người dùng từ TikTok, sau đó gọi trực tiếp API nội bộ của TikTok để tải bình luận với tốc độ cao.
 
-**Thu thập toàn bộ bình luận & reply từ bất kỳ video TikTok nào — ngay trên trình duyệt của bạn.**
-
-[🚀 Demo Live](https://tiktok-comment-crawler.onrender.com) · [📖 Hướng dẫn](#-hướng-dẫn-sử-dụng) · [🐛 Báo lỗi](https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler/issues)
-
-</div>
+- **Demo trực tiếp:** [https://tiktok-comment-crawler-1.onrender.com](https://tiktok-comment-crawler-1.onrender.com)
+- **Kho mã nguồn:** [https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler](https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler)
 
 ---
 
-## 📌 Tính năng
+## Tính năng chính
 
-| Tính năng | Mô tả |
-|-----------|-------|
-| 🔗 **Nhập link TikTok** | Hỗ trợ mọi định dạng link video TikTok |
-| 🤖 **Tự động crawl** | Dùng Playwright để lấy session hợp lệ, sau đó gọi API TikTok để thu thập toàn bộ comment |
-| 💬 **Crawl cả Reply** | Thu thập comment gốc lẫn toàn bộ reply con |
-| 📊 **Hiển thị trực tiếp** | Xem bình luận ngay trên web — phân trang, tìm kiếm theo nội dung/tên user |
-| 📄 **Xuất CSV** | Đặt tên file tùy ý rồi tải về — mã hóa UTF-8 đầy đủ tiếng Việt |
-| ⚡ **Log thời gian thực** | Theo dõi tiến trình crawl từng bước |
-| 🌙 **Giao diện Dark Mode** | Thiết kế tối hiện đại, responsive trên mọi thiết bị |
+- **Cào dữ liệu tự động:** Tự động lấy cookie phiên qua Playwright và phân trang qua API TikTok.
+- **Hỗ trợ đầy đủ Reply:** Quét cả bình luận gốc lẫn các câu trả lời con bên dưới từng bình luận.
+- **Xem trước trực tiếp:** Bảng hiển thị danh sách bình luận kèm phân trang và ô tìm kiếm nhanh theo nội dung hoặc tên người dùng.
+- **Xuất CSV chuẩn UTF-8:** Hỗ trợ tùy chỉnh tên file khi tải về, tương thích với Microsoft Excel và Google Sheets.
+- **Theo dõi tiến trình:** Hiển thị log trạng thái và số lượng dữ liệu thu thập theo thời gian thực.
 
 ---
 
-## 📂 Cấu trúc dự án
+## Cấu trúc thư mục
 
-```
+```text
 tiktok-comment-crawler/
-├── app.py                  # Flask backend — API routes & crawl logic
-├── cmt_python.py           # Script gốc (tham khảo)
-├── requirements.txt        # Thư viện Python cần thiết
-├── Dockerfile              # Dockerfile chuẩn cho Render/Railway (đủ lib Chromium)
-├── .dockerignore
-├── Procfile                # Cấu hình deploy WSGI
-├── render.yaml             # Render blueprint
-├── .gitignore
+├── app.py              # Backend Flask (xử lý crawl đa luồng, API endpoints)
+├── cmt_python.py       # Script crawl gốc dạng CLI
+├── Dockerfile          # Cấu hình container chạy Playwright & Chromium
+├── requirements.txt    # Danh sách thư viện Python
+├── render.yaml         # Cấu hình tự động triển khai trên Render
+├── Procfile            # Cấu hình WSGI Gunicorn
 ├── templates/
-│   └── index.html          # Giao diện web chính
-├── static/
-│   ├── css/
-│   │   └── style.css       # Stylesheet toàn bộ
-│   └── js/
-│       └── app.js          # Frontend logic (fetch API, table, pagination)
-└── output/                 # Thư mục lưu file CSV tạm (tự tạo)
+│   └── index.html      # Giao diện web chính
+└── static/
+    ├── css/style.css   # Giao diện
+    └── js/app.js       # Xử lý tương tác, polling trạng thái và hiển thị bảng dữ liệu
 ```
 
 ---
 
-## 🚀 Hướng dẫn sử dụng
+## Hướng dẫn cài đặt và chạy cục bộ (Local)
 
-### Cách 1 — Chạy local (khuyến nghị)
+### Yêu cầu hệ thống
 
-#### Yêu cầu
-- Python **3.10+**
-- pip
+- Python 3.10 trở lên
+- pip và kết nối Internet ổn định
 
-#### Các bước
+### Các bước thực hiện
 
-```bash
-# 1. Clone repo
-git clone https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler.git
-cd tiktok-comment-crawler
+1. **Clone repository về máy:**
+   ```bash
+   git clone https://github.com/DinhHoangPhuc3010/tiktok-comment-crawler.git
+   cd tiktok-comment-crawler
+   ```
 
-# 2. Tạo môi trường ảo (tùy chọn nhưng nên làm)
-python -m venv venv
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
+2. **Khởi tạo môi trường ảo (khuyến nghị):**
+   ```bash
+   python -m venv venv
+   # Trên Windows:
+   venv\Scripts\activate
+   # Trên macOS / Linux:
+   source venv/bin/activate
+   ```
 
-# 3. Cài thư viện
-pip install -r requirements.txt
+3. **Cài đặt các thư viện cần thiết:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-# 4. Cài Playwright browsers (chỉ cần làm 1 lần)
-playwright install chromium
+4. **Cài đặt trình duyệt Chromium cho Playwright:**
+   ```bash
+   playwright install chromium
+   ```
 
-# 5. Chạy server
-python app.py
-```
-
-Mở trình duyệt tại: **http://localhost:5000**
-
----
-
-### Cách 2 — Deploy lên Render (Dùng Docker - Khuyến nghị)
-
-> 💡 Do Playwright cần các thư viện hệ thống của trình duyệt Chromium (apt packages), trên Render bạn cần chọn **Runtime: Docker** (hoàn toàn miễn phí) thay vì Python Native để tránh lỗi thiếu quyền `sudo`.
-
-1. Fork repo này về tài khoản GitHub của bạn
-2. Đăng ký/đăng nhập tài khoản tại [render.com](https://render.com)
-3. Nhấn **New +** → **Web Service** → Chọn repository `tiktok-comment-crawler`
-4. Cấu hình dịch vụ:
-   - **Language / Runtime**: **Docker** (Render sẽ tự động nhận diện file `Dockerfile`)
-   - **Region**: Singapore (gần Việt Nam nhất)
-   - **Instance Type**: Free
-5. Nhấn **Deploy Web Service** và chờ Render build hoàn tất (mất khoảng 3-5 phút).
+5. **Chạy ứng dụng:**
+   ```bash
+   python app.py
+   ```
+   Sau đó mở trình duyệt tại địa chỉ: `http://localhost:5000`
 
 ---
 
-### Cách 3 — Deploy lên Railway
+## Triển khai lên Render (Render.com)
 
-1. Fork repo → Đăng nhập [railway.app](https://railway.app)
-2. **New Project** → **Deploy from GitHub repo**
-3. Thêm biến môi trường:
-   - `SECRET_KEY` = chuỗi bất kỳ (ví dụ: `my-super-secret-key`)
-4. Railway sẽ tự đọc `Procfile` và deploy
+Dự án đã cấu hình sẵn `Dockerfile` bao gồm Chromium và toàn bộ thư viện hệ thống cần thiết cho Playwright.
 
----
-
-## 🖥️ Hướng dẫn giao diện
-
-### Bước 1 — Nhập link video
-
-```
-https://www.tiktok.com/@username/video/7559970565407149319
-```
-
-Dán link vào ô **"Link video TikTok"** (hoặc nhấn nút 📋 để dán từ clipboard).
-
-### Bước 2 — Đặt tên file CSV
-
-Nhập tên file tùy ý (không cần đuôi `.csv`), ví dụ: `review_san_pham_A`.
-
-### Bước 3 — Bắt đầu crawl
-
-Nhấn **🚀 Bắt đầu Crawl**. Hệ thống sẽ:
-1. Mở trình duyệt ảo (headless), tải trang TikTok để lấy cookie hợp lệ
-2. Click vào khu vực comment để kích hoạt API
-3. Gọi API TikTok theo từng trang (cursor-based pagination)
-4. Thu thập toàn bộ comment + reply
-
-### Bước 4 — Xem kết quả
-
-Sau khi crawl xong, bảng bình luận hiện ra ngay bên dưới:
-- **Tìm kiếm** theo nội dung hoặc tên người dùng
-- **Phân trang** 50 comment/trang
-- Xem loại (Gốc / Reply), số lượng ❤️
-
-### Bước 5 — Tải về
-
-Nhấn **⬇️ Tải file CSV về máy**. File CSV được mã hóa UTF-8 với BOM (mở được trực tiếp trong Microsoft Excel mà không bị lỗi font tiếng Việt).
+1. Đăng nhập vào [Render Dashboard](https://dashboard.render.com).
+2. Chọn **New +** > **Web Service**.
+3. Kết nối với repository `tiktok-comment-crawler`.
+4. Tại mục **Runtime**, chọn **Docker** (Render sẽ tự động dùng file `Dockerfile`).
+5. Chọn vùng đặt server (khuyến nghị: **Singapore** để có tốc độ kết nối tốt nhất).
+6. Chọn gói dịch vụ (Free hoặc Starter tùy nhu cầu) và bấm **Deploy Web Service**.
 
 ---
 
-## 📊 Cấu trúc file CSV xuất ra
+## Cấu trúc dữ liệu file CSV xuất ra
 
-| Cột | Mô tả |
-|-----|-------|
-| `cid` | ID comment |
-| `text` | Nội dung bình luận |
-| `create_time` | Thời gian đăng (Unix timestamp) |
-| `digg_count` | Số lượt thích |
-| `reply_id` | ID comment cha (nếu là reply) |
-| `reply_to_reply_id` | ID reply cha (nếu reply lồng nhau) |
-| `reply_to_userid` | User ID được reply |
-| `reply_to_username` | Username được reply |
-| `user_nickname` | Tên hiển thị của người comment |
-| `user_id` | UID của người comment |
-| `user_sec_uid` | Secure UID (dùng để tìm profile) |
+Dữ liệu bình luận được lưu với mã hóa UTF-8 (có BOM) gồm các trường:
 
----
-
-## ⚙️ Cơ chế hoạt động
-
-```
-[User nhập URL]
-      ↓
-[Flask API /api/crawl/start]
-      ↓
-[Thread riêng: do_crawl()]
-      ├── Playwright (headless Chrome)
-      │     ├── Mở trang TikTok → lấy cookies hợp lệ
-      │     └── Click nút comment → kích hoạt session
-      │
-      └── requests (API TikTok)
-            ├── GET /api/comment/list/ → comment gốc (cursor pagination)
-            └── GET /api/comment/list/reply/ → reply của từng comment
-                ↓
-         [Lưu vào memory + file CSV]
-                ↓
-[Frontend poll /api/crawl/status/ mỗi 2s]
-      ↓
-[Hiển thị bảng + cho tải CSV]
-```
+| Tên cột | Ý nghĩa |
+|---|---|
+| `cid` | ID định danh của bình luận |
+| `text` | Nội dung văn bản của bình luận |
+| `create_time` | Thời gian tạo (Unix timestamp) |
+| `digg_count` | Số lượt thích bình luận |
+| `reply_id` | ID bình luận gốc (nếu là reply con) |
+| `reply_to_reply_id` | ID phản hồi trực tiếp (nếu là reply lồng nhau) |
+| `reply_to_userid` | User ID của người nhận phản hồi |
+| `reply_to_username` | Username của người nhận phản hồi |
+| `user_nickname` | Tên hiển thị của người bình luận |
+| `user_id` | UID của người bình luận |
+| `user_sec_uid` | Chuỗi sec_uid định danh profile người dùng trên TikTok |
 
 ---
 
-## ❓ FAQ
+## Lưu ý kỹ thuật & Pháp lý
 
-**Q: Tại sao crawl mất thời gian?**  
-A: TikTok có cơ chế rate limiting. Hệ thống tự động chờ giữa các trang để đảm bảo không bị chặn IP hoặc huỷ session.
-
-**Q: Có thể crawl video riêng tư (private) không?**  
-A: Không. Chỉ hỗ trợ video công khai (public).
-
-**Q: File CSV mở trong Excel có bị lỗi font không?**  
-A: Không, file được xuất với chuẩn UTF-8-BOM tương thích 100% với Microsoft Excel, Google Sheets và Numbers.
-
----
-
-## 🛡️ Lưu ý pháp lý
-
-Công cụ này chỉ được phát triển cho mục đích **nghiên cứu và học thuật**. Người dùng tự chịu trách nhiệm tuân thủ Điều khoản Dịch vụ của TikTok và các quy định về bảo vệ quyền riêng tư.
-
----
-
-## 📄 License
-
-Phát hành dưới giấy phép [MIT License](LICENSE).
+- TikTok áp dụng cơ chế giới hạn tần suất yêu cầu (rate limit). Ứng dụng đã thiết lập sẵn khoảng nghỉ giữa các request để đảm bảo kết nối ổn định.
+- Công cụ chỉ hoạt động với các video ở chế độ công khai (public).
+- Dự án phục vụ mục đích học tập, nghiên cứu và phân tích dữ liệu cá nhân. Người sử dụng chịu trách nhiệm tuân thủ Điều khoản sử dụng của nền tảng TikTok.
